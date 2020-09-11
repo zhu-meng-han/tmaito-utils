@@ -1,6 +1,6 @@
 {
   "name": "tmaito-fetch",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "axios fetch",
   "keywords": [
     "axios",
@@ -35,6 +35,8 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "axios": "^0.20.0"
+    "@types/qs": "^6.9.4",
+    "axios": "^0.20.0",
+    "qs": "^6.9.4"
   }
 }

@@ -87,7 +87,7 @@ if (IS_PROD) {
 export default [{
     input: 'src/index.ts',
     plugins,
-    external: ['axios'],
+    external: ['axios', 'qs'],
     output: [{
         format: 'cjs',
         file: `dist/${NAME}.common.prod.js`,
@@ -111,7 +111,7 @@ export default [{
   {
     input: './src/index.ts',
     plugins,
-    external: ['axios'],
+    external: ['axios', 'qs'],
     output: [{
         format: 'iife',
         name: 'index',

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { addPending, removePending } from './utils';
 
 const DEFAULT_OPTIONS = {
   BASE_URL: '/',
@@ -26,12 +27,20 @@ const fetch = (props: any) => {
     };
   }
   const instance = axios.create();
-  if (typeof props.requestInterceptor === 'function') {
-    instance.interceptors.request.use(props.requestInterceptor, (error) => Promise.reject(error));
-  }
-  if (typeof props.responseInterceptor === 'function') {
-    instance.interceptors.response.use(props.responseInterceptor, (error) => Promise.reject(error));
-  }
+  instance.interceptors.request.use(config => {
+    addPending(config);
+    return config;
+  }, (error) => Promise.reject(error));
+
+  instance.interceptors.response.use(response => {
+    setTimeout(() => {
+      removePending(response.config);
+    }, 400);
+    return response;
+  }, (error) => {
+    return Promise.reject(error);
+  });
+
   return instance
     .request(config)
     .then((response) => {
@@ -59,7 +68,9 @@ const fetch = (props: any) => {
         }
         return Promise.reject(`接口: ${url} 请求状态为: ${status}`);
       }
-      Promise.reject(e);
+      if (!axios.isCancel(e)) {
+        Promise.reject(e);
+      }
     });
 };
 
