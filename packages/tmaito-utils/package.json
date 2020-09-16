@@ -1,6 +1,6 @@
 {
   "name": "tmaito-utils",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "axios fetch",
   "keywords": [
     "axios",
@@ -33,5 +33,8 @@
     "collectCoverage": true,
     "testURL": "http://localhost"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "dependencies": {
+    "js-pinyin": "^0.1.9"
+  }
 }
